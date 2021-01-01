@@ -18,3 +18,28 @@ result = result / 4;
 alert(result);
 alert(userInput);
 */
+
+
+//Assignment - Function 
+/*
+function greet() {
+    alert('Hi there!');
+}
+
+function greetUser(userName) {
+    alert('Hi' + userName);
+}
+
+function combine(str1, str2, str3,) {
+    const combinedText = `${str1} ${str2} ${str3}`;
+    return combinedText;
+}
+
+greetUser('Gaurav');
+
+task3Element.addEventListener('click', greet);
+
+const combineString = combine('Hi', 'there', '!');
+alert(combineString);
+
+ */
