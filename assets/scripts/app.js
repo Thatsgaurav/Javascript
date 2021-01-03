@@ -22,3 +22,4 @@ function attackHandler() {
 }
 
 attackBtn.addEventListener('click', attackHandler);
+strongAttackBtn.addEventListener('click', strongAttackHandler)
