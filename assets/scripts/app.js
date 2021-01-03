@@ -1,67 +1,24 @@
-const defaultResult = 0;
-let currentResult = defaultResult;
-let logEntries = [];
+const ATTACK_VALUE = 10;
+const MONSTER_ATTACK_VALUE = 14;
 
-// Gets input from input field
-function getUserNumberInput() {
-  return usrInput.value;
+let chosenMaxLife = 100;
+let currentMonsterHealth = chosenMaxLife;
+let currentPlayerHealth = chosenMaxLife;
+
+adjustHealthBars(chosenMaxLife);
+
+function attackHandler() {
+  const damage = dealMonsterDamage(ATTACK_VALUE);
+  currentMonsterHealth -= damage;
+  const playerDamage = dealPlayerDamage(MONSTER_ATTACK_VALUE);
+  currentPlayerHealth -= playerDamage;
+  if (currentMonsterHealth <= 0 && currentPlayerHealth > 0) {
+    alert('You won!');
+  } else if (currentPlayerHealth <= 0 && currentMonsterHealth > 0) {
+    alert('You lost!');
+  } else if (currentPlayerHealth <= 0 && currentMonsterHealth <= 0) {
+    alert('You have a draw!');
+  }
 }
 
-// Generates and writes calculation log
-function createAndWriteOutput(operator, resultBeforeCalc, calcNumber) {
-  const calcDescription = `${resultBeforeCalc} ${operator} ${calcNumber}`;
-  outputResult(currentResult, calcDescription); // from vendor file
-}
-
-function writeToLog(
-  operationIdentifier,
-  prevResult,
-  operationNumber,
-  newResult
-) {
-  const logEntry = {
-    operation: operationIdentifier,
-    prevResult: prevResult,
-    number: operationNumber,
-    result: newResult
-  };
-  logEntries.push(logEntry);
-  console.log(logEntries);
-}
-
-function add() {
-  const enteredNumber = getUserNumberInput();
-  const initialResult = currentResult;
-  currentResult += enteredNumber;
-  createAndWriteOutput('+', initialResult, enteredNumber);
-  writeToLog('ADD', initialResult, enteredNumber, currentResult);
-}
-
-function subtract() {
-  const enteredNumber = getUserNumberInput();
-  const initialResult = currentResult;
-  currentResult -= enteredNumber;
-  createAndWriteOutput('-', initialResult, enteredNumber);
-  writeToLog('SUBTRACT', initialResult, enteredNumber, currentResult);
-}
-
-function multiply() {
-  const enteredNumber = getUserNumberInput();
-  const initialResult = currentResult;
-  currentResult *= enteredNumber;
-  createAndWriteOutput('*', initialResult, enteredNumber);
-  writeToLog('MULTIPLY', initialResult, enteredNumber, currentResult);
-}
-
-function divide() {
-  const enteredNumber = getUserNumberInput();
-  const initialResult = currentResult;
-  currentResult /= enteredNumber;
-  createAndWriteOutput('/', initialResult, enteredNumber);
-  writeToLog('DIVIDE', initialResult, enteredNumber, currentResult);
-}
-
-addBtn.addEventListener('click', add);
-subtractBtn.addEventListener('click', subtract);
-multiplyBtn.addEventListener('click', multiply);
-divideBtn.addEventListener('click', divide);
+attackBtn.addEventListener('click', attackHandler);
