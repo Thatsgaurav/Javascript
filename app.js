@@ -1,14 +1,25 @@
-const addListenerBtn = document.getElementById('add-listener-btn');
-const clickableBtn = document.getElementById('clickable-btn');
-const messageInput = document.getElementById('click-message-input');
+const startGameBtn = document.getElementById('start-game-btn'); 
 
-function printMessage() {
-  const value = messageInput.value;
-  console.log(value || 'Clicked me!');
-}
+const ROCK = 'ROCK';
+const PAPER = 'PAPER';
+const SCISSORS = 'SCISSORS';
+const DEFAULT_USER_CHOICE = ROCK;
 
-function addListener() {
-  clickableBtn.addEventListener('click', printMessage);
-}
+const getPlayerChoice = function() {
+  const selection = prompt(`${ROCK}, ${PAPER} or ${SCISSORS}?`, '').toUpperCase();
+  if (
+    selection !== ROCK &&
+    selection !== PAPER &&
+    selection !== SCISSORS
+  ) {
+    alert(`Invalid choice! We chose ${DEFAULT_USER_CHOICE} for you!`);
+    return DEFAULT_USER_CHOICE;
+  }
+  return selection;
+};
 
-addListenerBtn.addEventListener('click', addListener);
+startGameBtn.addEventListener('click', function() {
+  console.log('Game is starting...');
+  const playerSelection = getPlayerChoice();
+  console.log(playerSelection);
+});
