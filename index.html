@@ -4,21 +4,45 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Programming Paradigms</title>
-    <link rel="stylesheet" href="app.css" />
-    <script src="functional.js" defer></script>
+    <title>Web Components</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 2rem;
+        font-family: sans-serif;
+      }
+    </style>
+    <script src="modal.js"></script>
   </head>
   <body>
-    <form id="user-input">
-      <div class="form-control">
-        <label for="username">Username</label>
-        <input type="text" id="username" />
-      </div>
-      <div class="form-control">
-        <label for="password">Password</label>
-        <input type="password" id="password" />
-      </div>
-      <button type="submit">Create User</button>
-    </form>
+    <uc-modal>
+      <h1 slot="title">Please Confirm</h1>
+      <p>With your confirmation you agree to pay the full amount!</p>
+    </uc-modal>
+    <p>Please confirm your choice.</p>
+    <button>Show Details & Confirm</button>
+    <script>
+      const confirmButton = document.querySelector('button');
+      const modal = document.querySelector('uc-modal');
+
+      modal.addEventListener('confirm', () => {
+        console.log('Confirmed...');
+      });
+
+      modal.addEventListener('cancel', () => {
+        console.log('Cancelled...');
+      });
+
+      confirmButton.addEventListener('click', () => {
+        //  modal.setAttribute('opened', '');
+        if (!modal.isOpen) {
+          modal.open();
+          console.log('Opening...');
+        }
+      });
+    </script>
   </body>
 </html>
